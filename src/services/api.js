@@ -5,7 +5,7 @@ async function getPokemon() {
     
     return reponse.json();
     }catch (error) {
-        console.log('Error fetching the Pokemon data', error)
+        throw error;
     }
 }
 
