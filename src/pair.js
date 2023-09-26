@@ -9,18 +9,18 @@ function pair(array) {
         const idx2 = idx1 + 1;
 
         pairs.push({
-            front: pairedPokemon[idx1], 
-            back: pairedPokemon[idx2]
+            front: array[idx1], 
+            back: array[idx2]
         });
 
         pairs.push({
-            front: pairedPokemon[idx2],
-            back: pairedPokemon[idx1]
+            front: array[idx2],
+            back: array[idx1]
         });
 
     }
 
-    return pair;
+    return pairs;
 }
 
 export default pair
