@@ -1,33 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React, { useState, useEffect} from 'react'
 import './App.css'
+import { getPokemon } from './services/api'
+import { PokemonList } from './components/PokemonList'
+import shuffle from './shuffle'
+import pair from './pair'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [shuffledCards, setShuffledCards] = useState([])
+  const [selectedCards, setSelectedCards] = useState([]);
+  const [flippedCards, setFlippedCards] = useState([]);
+
+  useEffect(() => {
+    getPokemon().then(data => {
+      const pokemon = data.results.map(p => ({
+        id: p.name,
+        url: p.url
+      }) )
+      
+      const duplicated = pokemon.concat(pokemon);
+      const paired = pair(duplicated);
+
+      const shuffled = shuffle(paired);
+
+      setShuffledCards(shuffled);
+    })
+  }, [])
+
+  function handleCardClick(card) {
+    if (selectedCards.length < 2) {
+      setSelectedCards(prev => setSelectedCards([...prev, card]))
+    }
+    
+    if(selectedCards.length === 2) {
+      const card1 = selectedCards[0];
+      const card2 = selectedCards[1];
+
+      if (card1.back.id === card2.back.id) {
+        setFlippedCards([...flippedCards, card1, card2])
+      } else {
+        setTimeout(setSelectedCards([]), 1000)
+      }
+    }
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <PokemonList 
+        pokemon={shuffledCards}
+        flippedCards={flippedCards}
+        handleCardClick={handleCardClick}
+      />
     </>
   )
 }
