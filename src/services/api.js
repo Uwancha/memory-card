@@ -1,7 +1,11 @@
 
 async function getPokemon() {
     try {
-    const reponse = await fetch('https://pokeapi.co/api/v2/pokemon/?limit=6');
+    const reponse = await fetch('https://pokeapi.co/api/v2/pokemon/?limit=6', {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
     
     return reponse.json();
     }catch (error) {
