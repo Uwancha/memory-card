@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/style.css"
 
-function Pokemon({pokemon, flippedCards, handleClick}) {
+function Card({pokemon, flippedCards, handleClick}) {
     const isFliped = flippedCards.includes(pokemon)
     
     return (
@@ -13,4 +13,4 @@ function Pokemon({pokemon, flippedCards, handleClick}) {
     
 }
 
-export { Pokemon }
+export { Card }

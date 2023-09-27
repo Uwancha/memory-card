@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import './App.css'
 import { getPokemon } from './services/api'
-import { PokemonList } from './components/PokemonList'
+import { CardList } from './components/CardList'
 import shuffle from './shuffle'
 import pair from './pair'
 
@@ -45,7 +45,7 @@ function App() {
 
   return (
     <>
-      <PokemonList 
+      <CardList 
         pokemon={shuffledCards}
         flippedCards={flippedCards}
         handleCardClick={handleCardClick}
