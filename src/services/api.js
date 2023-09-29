@@ -1,7 +1,7 @@
 
 async function getPokemon() {
     
-    const reponse = await fetch('https://pokeapi.co/api/v2/pokemon/?limit=6');
+    const reponse = await fetch('https://pokeapi.co/api/v2/pokemon/?limit=12');
                             
     const data = await reponse.json();
 
