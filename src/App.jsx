@@ -3,51 +3,46 @@ import './App.css'
 import { getPokemon } from './services/api'
 import { CardList } from './components/CardList'
 import shuffle from './shuffle'
-import pair from './pair'
+import ScoreBoard from './components/scoreboard'
 
 function App() {
-  const [shuffledCards, setShuffledCards] = useState([])
+  const [shuffledCards, setShuffledCards] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
-  const [flippedCards, setFlippedCards] = useState([]);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     getPokemon().then(data => {
-      const pokemon = data.results.map(p => ({
+      const pokemon = data.map(p => ({
         id: p.name,
-        url: p.url
+        url: p.frontImage
       }) )
-      
-      const duplicated = pokemon.concat(pokemon);
-      const paired = pair(duplicated);
 
-      const shuffled = shuffle(paired);
-
-      setShuffledCards(shuffled);
+      shuffleCards(pokemon)
     })
   }, [])
 
   function handleCardClick(card) {
-    if (selectedCards.length < 2) {
+    if (selectedCards.includes(card)) {
+      setScore(0)
+      
+    }else {
+      setScore(score + 1)
       setSelectedCards(prev => setSelectedCards([...prev, card]))
     }
-    
-    if(selectedCards.length === 2) {
-      const card1 = selectedCards[0];
-      const card2 = selectedCards[1];
 
-      if (card1.back.id === card2.back.id) {
-        setFlippedCards([...flippedCards, card1, card2])
-      } else {
-        setTimeout(setSelectedCards([]), 1000)
-      }
-    }
+    shuffleCards(shuffledCards)
+  }
+
+  function shuffleCards(cards) {
+    const shuffled = shuffle(cards);
+    setShuffledCards(shuffled); 
   }
 
   return (
     <>
+      <ScoreBoard score={score} />
       <CardList 
         pokemon={shuffledCards}
-        flippedCards={flippedCards}
         handleCardClick={handleCardClick}
       />
     </>
