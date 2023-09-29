@@ -4,7 +4,7 @@ import { Card } from "./Card";
 import Loading from "./Loading";
 import { useMemo } from "react";
 
-function CardList({pokemon, flippedCards, handleCardClick}) {
+function CardList({pokemon, handleCardClick}) {
     const memoizedPokemon = useMemo(() => {
         return pokemon;
       }, [pokemon])
@@ -14,8 +14,8 @@ function CardList({pokemon, flippedCards, handleCardClick}) {
           {memoizedPokemon.length === 0 ? <Loading/> : (
             memoizedPokemon.map(p => (
               <Card
+                key={p.id}
                 pokemon={p}
-                flippedCards={flippedCards}
                 handleClick={handleCardClick}
               />
             )) 
