@@ -1,4 +1,4 @@
-function ScoreBoard(score) {
+function ScoreBoard({score}) {
     
     return (
         <>
