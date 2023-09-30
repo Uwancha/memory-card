@@ -1,4 +1,4 @@
-function ScoreBoard({score}) {
+function ScoreBoard({score, bestScore}) {
     
     return (
         <div className="scoreBoard">
@@ -7,6 +7,7 @@ function ScoreBoard({score}) {
             </div>
             <div>
                 <h3>Score: {score}</h3>
+                <h3>Best Score: {bestScore}</h3>
             </div>
         </div>
     )
