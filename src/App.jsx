@@ -10,6 +10,7 @@ function App() {
   const [selectedCards, setSelectedCards] = useState([]);
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
+  const [attempts, setAttempts] = useState(0);
 
   useEffect(() => {
     getPokemon().then(data => {
@@ -29,6 +30,10 @@ function App() {
   }, [score])
 
   function handleCardClick(card) {
+    setAttempts(attempts + 1)
+    if (score === 16) {
+      setIsGameOver(true)
+    }
     if (selectedCards.includes(card)) {
       setScore(0)
       
@@ -50,13 +55,13 @@ function App() {
   }
 
   return (
-    <>
-      <ScoreBoard score={score} bestScore={bestScore}/>
+    <div>
+      <ScoreBoard score={score} bestScore={bestScore} attempts={attempts}/>
       <CardList 
         pokemon={shuffledCards}
         handleCardClick={handleCardClick}
       />
-    </>
+    </div>
   )
 }
 
