@@ -9,6 +9,7 @@ function App() {
   const [shuffledCards, setShuffledCards] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
   const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
 
   useEffect(() => {
     getPokemon().then(data => {
@@ -21,6 +22,12 @@ function App() {
     })
   }, [])
 
+  useEffect(() => {
+    if (score > bestScore) {
+      setBestScore(score)
+    }
+  }, [score])
+
   function handleCardClick(card) {
     if (selectedCards.includes(card)) {
       setScore(0)
@@ -28,6 +35,10 @@ function App() {
     }else {
       setScore(score + 1)
       setSelectedCards(prev => setSelectedCards([...prev, card]))
+    }
+
+    if (score > bestScore) {
+      setBestScore(score)
     }
 
     shuffleCards(shuffledCards)
@@ -40,7 +51,7 @@ function App() {
 
   return (
     <>
-      <ScoreBoard score={score} />
+      <ScoreBoard score={score} bestScore={bestScore}/>
       <CardList 
         pokemon={shuffledCards}
         handleCardClick={handleCardClick}
