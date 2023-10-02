@@ -38,7 +38,7 @@ function App() {
       setIsGameOver(true)
     }
     if (selectedCards.includes(card)) {
-      setScore(0)
+      resetGame()
       
     }else {
       setScore(score + 1)
@@ -51,6 +51,11 @@ function App() {
   function shuffleCards(cards) {
     const shuffled = shuffle(cards);
     setShuffledCards(shuffled); 
+  }
+
+  function resetGame() {
+    setScore(0)
+    setSelectedCards([])
   }
 
   function restartTheGame () {
