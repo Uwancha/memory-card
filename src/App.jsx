@@ -25,12 +25,6 @@ function App() {
     })
   }, [])
 
-  useEffect(() => {
-    if (score > bestScore) {
-      setBestScore(score)
-    }
-  }, [score])
-
   function handleCardClick(card) {
     setAttempts(attempts + 1)
 
@@ -54,6 +48,9 @@ function App() {
   }
 
   function resetGame() {
+    if (score > bestScore) {
+      setBestScore(score)
+    }
     setScore(0)
     setSelectedCards([])
   }
