@@ -45,10 +45,6 @@ function App() {
       setSelectedCards(prev => setSelectedCards([...prev, card]))
     }
 
-    if (score > bestScore) {
-      setBestScore(score)
-    }
-
     shuffleCards(shuffledCards)
   }
 
