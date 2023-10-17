@@ -6,6 +6,10 @@ A memory card game built with React. The goal is to explore all 12 Pokemon cards
 
 This project was built while learning full stack web development through The Odin Project's curriculum.
 
+## Live demo
+
+Here is a [live demo](https://cardgame-uwancha.netlify.app/)
+
 ## How To Play
 
 The cards will be shuffled and displayed to begin the game.
