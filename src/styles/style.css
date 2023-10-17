@@ -46,3 +46,23 @@
 .Restart {
     color: aqua;
 }
+
+@media (max-width: 768px) {
+    .lists {
+        grid-template-columns: repeat(2, 150px);
+        grid-template-rows: repeat(6, 200px);
+
+        place-content: center;
+    }
+
+    .scoreBoard {
+        flex-direction: column;
+        font-size: 10px;
+    }
+
+    .scoreBoard div {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}
